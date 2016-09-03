@@ -26,29 +26,27 @@ function removeClass(element, cls) {
 }
 
 function startWatch() {
-    console.log("start");
-    var tdNodes = document.getElementsByTagName("TD");
-    for (i = 0; i < tdNodes.length; i++) {
-        setNodes(tdNodes[i]);
-    }
-}
-
-function endWatch() {
-    console.log("stop");
-    var tdNodes = document.getElementsByTagName("TD");
-    for (i = 0; i < tdNodes.length; i++) {
-        $( tdNodes[i]).on('click', function(){});
-    }
-}
-
-function setNodes(node){
-
-    node.addEventListener('click', function () {
-        console.log(node);
-        if (containsClass(node, "tableAnalyticsSelected")) {
-            removeClass(node,"tableAnalyticsSelected");
-        }else{
-            node.className += "tableAnalyticsSelected";
+    var isMouseDown = false, isHighlighted, Elem;
+    $("body").mousedown(function (e) {
+        Elem = e.target;
+        isMouseDown = true;
+        if (Elem.nodeName == 'TD') {
+            $(Elem).toggleClass("tableAnalyticsSelected");
+            isHighlighted = $(Elem).hasClass("tableAnaylticsSelected");
+            return false;
         }
-    })
+    }).mouseover(function (e) {
+        Elem = e.target;
+        if (Elem.nodeName == 'TD') {
+            if (isMouseDown) {
+                $(Elem).toggleClass("tableAnalyticsSelected");
+            }
+        }
+    }).bind('selectstart',function(){return false;});
+
+    $(document).mouseup(function(){
+        isMouseDown = false;
+    });
+
+
 }
