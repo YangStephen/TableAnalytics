@@ -42,8 +42,7 @@ function startWatch() {
                 $(Elem).toggleClass("tableAnalyticsSelected");
             }
         }
-    }).bind('selectstart',function(){//return false;
-         });
+    }).bind('selectstart',function(){return false;});
 
     $(document).mouseup(function(){
         isMouseDown = false;
