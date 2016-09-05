@@ -10,7 +10,6 @@ chrome.runtime.onMessage.addListener(
             for (i = 0; i < responseNodes.length; i++) {
                 responseArr.push(responseNodes[i].innerHTML)
             }
-            console.log(responseArr);
             sendResponse(responseArr);
         }
     }
